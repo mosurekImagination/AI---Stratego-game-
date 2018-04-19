@@ -20,30 +20,11 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("sample.fxml"));
         Parent root = (Parent)loader.load();
         Controller controller = (Controller)loader.getController();
-        controller.setStratego(new Stratego(20));
+        controller.setStratego(new Stratego(3));
+        controller.initialiseBoard();
 
-
-        Rectangle r = new Rectangle();
-        Image image = new Image("sample/images/circle.png");
-        r.setFill(new ImagePattern(image));
-        r.setX(0);
-        r.setY(0);
-        r.setWidth(100);
-        r.setHeight(100);
-
-        Pane canvas = new Pane();
-        canvas.getChildren().add(r);
-
-        GridPane gp = (GridPane)((HBox)root).getChildren().get(0);
-        gp.addRow(1,r);
-        gp.addRow(2,new Text("Tekst"));
-        gp.getRowConstraints().get(0);
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root));
-
-        Stratego stratego = new Stratego(10, controller);
-        stratego.printBoard();
-
         primaryStage.show();
     }
 
