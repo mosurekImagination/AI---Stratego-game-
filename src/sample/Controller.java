@@ -136,6 +136,7 @@ public class Controller {
         game.newGame(Integer.valueOf(size.getText()));
         gp.getColumnConstraints().clear();
         gp.getRowConstraints().clear();
+        updateStats();
         initialiseBoard();
     }
 }

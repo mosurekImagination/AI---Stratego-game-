@@ -45,7 +45,52 @@ public class Stratego {
     }
 
     private int checkBias(int x, int y) {
-        return 0;
+        int sum=0;
+        int sum1=0;
+        int sum2=0;
+        int sum3=0;
+        int sum4=0;
+        final int currpl = getCurrentPlayer();
+        //przekątna lewo, góra
+        boolean isCorrect = true;
+        for(int i=x-1, j=y-1; i>=0 && j >= 0 && isCorrect; i--, j--){
+            if(board[i][j] == currpl){
+                sum1++;
+            }
+            else{
+                isCorrect = false;
+            }
+        }
+        boolean isCorrect2 = true;
+        for(int i=x+1, j=y+1; i<getSize() && j< getSize() && isCorrect2; i++, j++){
+            if(board[i][j] == currpl){
+                sum2++;
+            }
+            else{
+                isCorrect2 = false;
+            }
+        }
+        sum += isCorrect && isCorrect2 ? sum1+sum2: 0;
+        isCorrect = true;
+        for(int i=x+1, j=y-1; i<getSize() && j>=0 && isCorrect; i++, j--){
+            if(board[i][j] == currpl){
+                sum3++;
+            }
+            else{
+                isCorrect = false;
+            }
+        }
+        isCorrect2 = true;
+        for(int i=x-1, j=y+1; i>= 0 && j<getSize() && isCorrect2; i--, j++){
+            if(board[i][j] == currpl){
+                sum4++;
+            }
+            else{
+                isCorrect2 = false;
+            }
+        }
+        sum += isCorrect && isCorrect2 ? sum3+sum4: 0;
+        return sum > 0 ? sum+1 : 0;
     }
 
     private int checkColumn(int y) {
@@ -54,21 +99,21 @@ public class Stratego {
             for(int i=0; i<getSize() && connected; i++){
                 connected = (board[i][y]== 1 || board[i][y]==3);
             }
-            if(connected){
-                for(int i=0; i<getSize() && connected; i++){
-                     board[i][y]=3;
-                }
-            }
+//            if(connected){
+//                for(int i=0; i<getSize() && connected; i++){
+//                     board[i][y]=3;
+//                }
+//            }
         }
         if(getCurrentPlayer()==SECONDPTURN){
             for(int i=0; i<getSize() && connected; i++){
                 connected = (board[i][y]== 2 || board[i][y]==4);
             }
-            if(connected){
-                for(int i=0; i<getSize() && connected; i++){
-                    board[i][y]=4;
-                }
-            }
+//            if(connected){
+//                for(int i=0; i<getSize() && connected; i++){
+//                    board[i][y]=4;
+//                }
+//            }
         }
         return connected ? 1:0;
     }
