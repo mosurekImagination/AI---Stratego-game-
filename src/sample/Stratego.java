@@ -9,8 +9,6 @@ public class Stratego {
     int player;
     public final int FIRSTPTURN = 1;
     public final int SECONDPTURN = 2;
-    public final int FIRSTPCHECKED = 3;
-    public final int SECONDPCHECKED = 4;
     int[] points;
     int winner;
     int moves =0;
@@ -99,21 +97,11 @@ public class Stratego {
             for(int i=0; i<getSize() && connected; i++){
                 connected = (board[i][y]== 1 || board[i][y]==3);
             }
-//            if(connected){
-//                for(int i=0; i<getSize() && connected; i++){
-//                     board[i][y]=3;
-//                }
-//            }
         }
         if(getCurrentPlayer()==SECONDPTURN){
             for(int i=0; i<getSize() && connected; i++){
                 connected = (board[i][y]== 2 || board[i][y]==4);
             }
-//            if(connected){
-//                for(int i=0; i<getSize() && connected; i++){
-//                    board[i][y]=4;
-//                }
-//            }
         }
         return connected ? 1:0;
     }
