@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -15,35 +16,35 @@
 <HBox prefHeight="800.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
     <children>
         <GridPane fx:id="gp" prefHeight="800.0" prefWidth="800.0">
-        </GridPane>
+</GridPane>
         <Pane maxWidth="300.0" prefHeight="200.0" prefWidth="300.0">
             <children>
-                <Text fx:id="Title" fill="#5503cf" layoutX="2.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stratego" textAlignment="CENTER" wrappingWidth="299.99998211860657">
+                <Text fx:id="Title" fill="#5503cf" layoutX="1.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stratego" textAlignment="CENTER" wrappingWidth="299.99998211860657">
                     <font>
                         <Font size="60.0" />
                     </font>
                 </Text>
-                <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="25.0" layoutY="244.0">
+                <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="24.0" layoutY="167.0">
                     <image>
                         <Image url="@images/circle.png" />
                     </image>
                 </ImageView>
-                <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="25.0" layoutY="365.0">
+                <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="24.0" layoutY="288.0">
                     <image>
                         <Image url="@images/X.png" />
                     </image>
                 </ImageView>
-                <Text fx:id="O_Points" layoutX="182.0" layoutY="299.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                <Text fx:id="O_Points" layoutX="181.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                     <font>
                         <Font name="BN Machine" size="28.0" />
                     </font>
                 </Text>
-                <Text fx:id="X_Points" layoutX="182.0" layoutY="419.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                <Text fx:id="X_Points" layoutX="181.0" layoutY="342.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                     <font>
                         <Font name="BN Machine" size="28.0" />
                     </font>
                 </Text>
-                <Text fill="#5503cf" layoutX="2.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Punktacja:" textAlignment="CENTER" wrappingWidth="299.99998211860657">
+                <Text fill="#5503cf" layoutX="1.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Punktacja:" textAlignment="CENTER" wrappingWidth="299.99998211860657">
                     <font>
                         <Font size="27.0" />
                     </font>
@@ -51,7 +52,7 @@
                 <Button layoutX="212.0" layoutY="743.0" mnemonicParsing="false" onAction="#exit" text="Wyjście" />
                 <Button layoutX="109.0" layoutY="742.0" mnemonicParsing="false" text="Useless Button" />
                 <Button layoutX="25.0" layoutY="743.0" mnemonicParsing="false" onAction="#newGame" text="Nowa Gra" />
-                <Text fill="#5503cf" layoutX="-10.0" layoutY="509.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Menu:" textAlignment="CENTER" wrappingWidth="299.99998211860657">
+                <Text fill="#5503cf" layoutX="-10.0" layoutY="429.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Menu:" textAlignment="CENTER" wrappingWidth="299.99998211860657">
                     <font>
                         <Font size="27.0" />
                     </font>
@@ -61,36 +62,53 @@
                         <Font size="16.0" />
                     </font>
                 </Text>
-                <Text fill="#5503cf" layoutX="3.0" layoutY="613.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AI:" textAlignment="CENTER" wrappingWidth="122.40000653266907">
+                <Text fill="#5503cf" layoutX="73.0" layoutY="537.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AI:" textAlignment="CENTER" wrappingWidth="122.40000653266907">
                     <font>
                         <Font size="16.0" />
                     </font>
                 </Text>
-            <CheckBox fx:id="chbxAIP1" layoutX="140.0" layoutY="600.0" mnemonicParsing="false" />
-            <CheckBox fx:id="chbxAIP2" layoutX="232.0" layoutY="600.0" mnemonicParsing="false" selected="true" />
-                <TextField fx:id="size" layoutX="178.0" layoutY="638.0" prefHeight="26.0" prefWidth="55.0" text="2" />
+            <CheckBox fx:id="chbxAIP1" layoutX="126.0" layoutY="562.0" mnemonicParsing="false" onAction="#onAIChecked1" />
+            <CheckBox fx:id="chbxAIP2" layoutX="125.0" layoutY="601.0" mnemonicParsing="false" onAction="#onAIChecked2" selected="true" />
+                <TextField fx:id="size" layoutX="178.0" layoutY="638.0" prefHeight="26.0" prefWidth="55.0" text="1" />
                 <Text fill="#5503cf" layoutX="16.0" layoutY="706.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aktualny gracz:" textAlignment="CENTER" wrappingWidth="122.40000653266907">
                     <font>
                         <Font size="16.0" />
                     </font>
                 </Text>
                 <Rectangle fx:id="accPlayer" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="46.0" layoutX="179.0" layoutY="676.0" stroke="BLACK" strokeType="INSIDE" width="56.0" />
-            <Text fill="#5503cf" layoutX="89.0" layoutY="590.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gracz 1:" textAlignment="CENTER" wrappingWidth="122.40000653266907">
+            <Text fill="#5503cf" layoutX="16.0" layoutY="575.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gracz 1:" textAlignment="CENTER" wrappingWidth="72.58201637864113">
                <font>
                   <Font size="16.0" />
                </font>
             </Text>
-            <Text fill="#5503cf" layoutX="181.0" layoutY="590.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gracz 2:" textAlignment="CENTER" wrappingWidth="122.40000653266907">
+            <Text fill="#5503cf" layoutX="16.0" layoutY="614.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gracz 2:" textAlignment="CENTER" wrappingWidth="72.58201637864113">
                <font>
                   <Font size="16.0" />
                </font>
             </Text>
-            <Text fill="#5503cf" layoutX="8.0" layoutY="556.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Głębokość drzewa:" textAlignment="CENTER" wrappingWidth="133.59995770454407">
+            <Text fill="#5503cf" layoutX="8.0" layoutY="476.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Głębokość drzewa:" textAlignment="CENTER" wrappingWidth="133.59995770454407">
                <font>
                   <Font size="16.0" />
                </font>
             </Text>
-            <TextField fx:id="tfDepth" layoutX="170.0" layoutY="538.0" prefHeight="26.0" prefWidth="55.0" text="5" />
+            <TextField fx:id="tfDepth" layoutX="170.0" layoutY="458.0" prefHeight="26.0" prefWidth="55.0" text="5" />
+            <Text fx:id="tThinking" fill="#5503cf" layoutX="-1.0" layoutY="8.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-Myślę-" textAlignment="CENTER" visible="false" wrappingWidth="299.99998211860657">
+               <font>
+                  <Font size="60.0" />
+               </font>
+            </Text>
+            <ChoiceBox fx:id="chobxFirstPlayer" disable="true" layoutX="156.0" layoutY="559.0" prefHeight="22.0" prefWidth="134.0" />
+            <ChoiceBox fx:id="chobxSecondPlayer" layoutX="157.0" layoutY="598.0" prefHeight="22.0" prefWidth="134.0" />
+            <ImageView fitHeight="26.0" fitWidth="27.0" layoutX="84.0" layoutY="557.0">
+               <image>
+                  <Image url="@images/X.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="36.0" fitWidth="34.0" layoutX="81.0" layoutY="591.0">
+               <image>
+                  <Image url="@images/circle.png" />
+               </image>
+            </ImageView>
             </children>
         </Pane>
     </children>

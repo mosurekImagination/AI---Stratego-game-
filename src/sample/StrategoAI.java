@@ -23,8 +23,7 @@ public class StrategoAI {
 
     public Touple getNextMove(int[][] board){
         root = new Node(board);
-        int[] a = {0,0};
-        root.setPoints(a);
+        root.setPoints(0,0);
         alphaBeta(root,DEPTH,Integer.MIN_VALUE, Integer.MAX_VALUE, true);
         Node bestNode = root.getBestChild();
         return new Touple(bestNode.getX(), bestNode.getY());
@@ -45,9 +44,7 @@ public class StrategoAI {
         //Maximizing Player
         if(maximizingPlayer){
             for (Node n:children) {
-                n.setPoints(node.getPoints());
-                n.setPoints(node.getPoints()[0] + n.getEarnedPoints(),true);
-
+                n.setPoints(node.getMaximizePlayerScore() + n.getEarnedPoints(),node.getMinimisePlayerScore());
                 alpha = Math.max(alpha,alphaBeta(n,depth-1, alpha, beta, false));
                 if(alpha >= beta)
                     break;
@@ -59,8 +56,7 @@ public class StrategoAI {
         //Minimizing Player
         else {
             for (Node n:children) {
-                n.setPoints(node.getPoints());
-                n.setPoints(node.getPoints()[1] + n.getEarnedPoints(), false);
+                n.setPoints(node.getMaximizePlayerScore(), node.getMinimisePlayerScore()+ n.getEarnedPoints());
                 beta = Math.min(beta,alphaBeta(n,depth-1, alpha, beta, true));
                 node.value = beta;
                 if(alpha >= beta)
@@ -72,10 +68,10 @@ public class StrategoAI {
 
     private int getHeuresticValue(Node node) {
         if(heurestic_value == HEURESTIC_MAX_POINTS){
-            return node.getPoints()[0];
+            return node.getMinimisePlayerScore();
         }
         if(heurestic_value == HEURESTIC_MAX_DIFFERENCE){
-            return node.getPoints()[0]-node.getPoints()[1];
+            return node.getMaximizePlayerScore()-node.getMinimisePlayerScore();
         }
 
         return -1;

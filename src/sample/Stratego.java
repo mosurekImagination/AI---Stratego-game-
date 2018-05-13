@@ -15,12 +15,13 @@ public class Stratego {
     public final int FIRST_PLAYER = 1;
     public final int SECOND_PLAYER = 2;
     public final int DRAW = -1;
-    public final int CUR_PLAYING = 0;
     public final boolean[] ai_players;
     int[] points;
     int winner;
     int moves =0;
     StrategoAI ai;
+    StrategoAI secondAi;
+    boolean turnament_mode;
 
     public Stratego(int size){
         points = new int[2];
@@ -29,11 +30,11 @@ public class Stratego {
         player = FIRST_PLAYER;
         winner = 0;
 
-        //INIT AI CORE
-        ai = new StrategoAI();
-        ai.setHeurestic_value(StrategoAI.HEURESTIC_MAX_POINTS);
     }
 
+    public void setAiHeurestic(int heurestic){
+        ai.setHeurestic_value(heurestic);
+    }
     public boolean makeMove(int x, int y){
         return true;
     }
@@ -55,14 +56,26 @@ public class Stratego {
         return false;
     }
 
+    public void setAiHeurestic(int firstPHeurestic, int secondPHeurestic){
+        if(!turnament_mode){
+            turnament_mode = true;
+            secondAi = new StrategoAI();
+        }
+        ai.setHeurestic_value(firstPHeurestic);
+        secondAi.setHeurestic_value(secondPHeurestic);
+
+    }
     public Touple getAImove(){
+        Touple move = null;
+        if(turnament_mode){
+            if (isAIControlled(player)) {
+                move = player == FIRST_PLAYER ? ai.getNextMove(board): secondAi.getNextMove(board);
+            }
+        }
         if(isAIControlled(player)){
-            Touple move = ai.getNextMove(board);
-            return move;
+            move = ai.getNextMove(board);
         }
-        else{
-            return null;
-        }
+        return move;
     }
 
     private boolean isAIControlled(int player) {
@@ -76,12 +89,19 @@ public class Stratego {
         //INITIALISE WHICH PLAYER WILL BE CONTROLLED BY AI
         ai_players[0]=AI1PLAYER;
         ai_players[1]=AI2PLAYER;
-        ai.setDepth(depth);
+
         winner = 0;
         moves = 0;
 
         //SET FIRST PLAYER TURN
         player = FIRST_PLAYER;
+
+        //INIT AI
+        ai = new StrategoAI();
+        ai.setHeurestic_value(StrategoAI.HEURESTIC_MAX_DIFFERENCE);
+        ai.setDepth(depth);
+
+        turnament_mode = false;
     }
 
     private void changePlayer(){

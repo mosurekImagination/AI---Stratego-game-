@@ -22,6 +22,7 @@ public class Main extends Application {
         Controller controller = (Controller)loader.getController();
         controller.setStratego(new Stratego(3));
         controller.initialiseBoard();
+        controller.initialiseAIChoiceBox();
 
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root));

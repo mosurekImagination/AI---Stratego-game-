@@ -12,13 +12,15 @@ public class Node {
 
     private int[] points;
 
+    private int maximizePlayerScore;
+
+    private int minimisePlayerScore;
     int value=0;
     private int x;
-
     private int y;
+
     List<Node> childs;
     StrategoLogic logic;
-
 
     public Node(int [][]board){
         this.board = board;
@@ -37,8 +39,8 @@ public class Node {
         if(x==-1 || y ==-1) return 0;
         return logic.getPoints(x,y);
     }
-    //function used to create Node Childs
 
+    //function used to create Node Childs
     public List<Touple> getPossibleMoves(int[][]board){
         ArrayList<Touple> possibleMoves = new ArrayList<>();
         for(int i=0; i<board.length; i++){
@@ -50,6 +52,7 @@ public class Node {
         }
         return possibleMoves;
     }
+
     public List<Node> getChilds(){
         //if Function is called first time for node
         if(childs.size()==0){
@@ -63,7 +66,7 @@ public class Node {
                 Node child = new Node(logic.fillBoardField(board, t.x,t.y));
                 child.setXY(t.x,t.y);
                 childs.add(child);
-                child.setPoints(points);
+                child.setPoints(maximizePlayerScore, minimisePlayerScore);
             }
         }
         //printChildBoards();
@@ -71,8 +74,8 @@ public class Node {
     }
 
     //check if game ends
-
     //all fields have to not be equal 0
+
     public boolean isTerminal(){
         boolean isTerminal = true;
         for(int i=0; i<logic.getSize() && isTerminal; i++){
@@ -83,7 +86,6 @@ public class Node {
         return isTerminal;
     }
     //get Child node with the higher value
-
     public Node getBestChild() {
         int maxValue=0;
         int index=0;
@@ -96,6 +98,7 @@ public class Node {
 
         return childs.get(index);
     }
+
     private void printChildBoards(){
         System.out.println("Board:");
         logic.printBoard();
@@ -105,20 +108,20 @@ public class Node {
             System.out.println("---------------------------------");
         }
     }
-
     public int[] getPoints() {
         return points;
     }
 
     public void setPoints(int points, boolean maximizePlayer) {
-       if(maximizePlayer) this.points[0] = points;
+       if(maximizePlayer) maximizePlayerScore = points;
        else {
-           this.points[1] = points;
+           minimisePlayerScore = points;
        }
     }
 
-    public void setPoints(int[] points) {
-        this.points = points;
+    public void setPoints(int maxP, int minP) {
+        maximizePlayerScore = maxP;
+        minimisePlayerScore = minP;
     }
 
     public int getX() {
@@ -127,5 +130,21 @@ public class Node {
 
     public int getY() {
         return y;
+    }
+
+    public int getMaximizePlayerScore() {
+        return maximizePlayerScore;
+    }
+
+    public void setMaximizePlayerScore(int maximizePlayerScore) {
+        this.maximizePlayerScore = maximizePlayerScore;
+    }
+
+    public int getMinimisePlayerScore() {
+        return minimisePlayerScore;
+    }
+
+    public void setMinimisePlayerScore(int minimisePlayerScore) {
+        this.minimisePlayerScore = minimisePlayerScore;
     }
 }

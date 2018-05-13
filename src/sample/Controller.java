@@ -1,8 +1,13 @@
 package sample;
 
+import javafx.beans.property.SimpleListProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.ObservableListBase;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
@@ -36,12 +41,21 @@ public class Controller {
     CheckBox chbxAIP1;
     @FXML
     CheckBox chbxAIP2;
+    @FXML
+    Text tThinking;
+    @FXML
+    ChoiceBox chobxFirstPlayer;
+    @FXML
+    ChoiceBox chobxSecondPlayer;
 
     Stratego game;
     ArrayList<Rectangle> fields;
     ImagePattern O_IMAGE = new ImagePattern(new Image("sample/images/circle.png"));
     ImagePattern X_IMAGE = new ImagePattern(new Image("sample/images/X.png"));
     ImagePattern HIGHLIGHT = new ImagePattern(new Image("sample/images/highlight.png"));
+
+    static final String MAX_DIFF = "MAX DIFFERENCE";
+    static final String MAX_POINTS = "MAX POINTS";
 
     public void setStratego(Stratego str){
         game = str;
@@ -70,14 +84,35 @@ public class Controller {
         else{
             accPlayer.setFill(O_IMAGE);
         }
-        makeAImove();
+        if(!game.isEnd()) {
+            makeAImove();
+        }
     }
 
     private void makeAImove() {
-        if(game.isAITurn()){
+        if(game.isAITurn() && !game.isEnd()){
+            lockThinkingStatus(true);
             Touple move = game.getAImove();
+            lockThinkingStatus(false);
             onClick(move.x, move.y);
+
         }
+    }
+
+    private void lockThinkingStatus(boolean b) {
+        tThinking.setVisible(b);
+    }
+
+    public void initialiseAIChoiceBox(){
+        initChoiceBox(chobxFirstPlayer);
+        initChoiceBox(chobxSecondPlayer);
+
+    }
+
+    private void initChoiceBox(ChoiceBox box) {
+        ObservableList<String> cursors = FXCollections.observableArrayList("MAX DIFFERENCE", "MAX POINTS");
+        box.setValue(cursors.get(0));
+        box.setItems(cursors);
     }
 
     public void initialiseBoard(){
@@ -160,8 +195,32 @@ public class Controller {
         gp.getRowConstraints().clear();
         updateStats();
         initialiseBoard();
-        if( chbxAIP1.isSelected()){
+        if(chbxAIP2.isSelected() || chbxAIP1.isSelected()){
+            game.setAiHeurestic(getHeuristic((String)chobxSecondPlayer.getValue()));
             makeAImove();
         }
+        if( chbxAIP1.isSelected() && chbxAIP2.isSelected()){
+                game.setAiHeurestic(
+                        getHeuristic((String)chobxFirstPlayer.getValue()), getHeuristic((String)chobxSecondPlayer.getValue()));
+            makeAImove();
+        }
+    }
+
+    private int getHeuristic(String heuristic) {
+        switch (heuristic) {
+            case MAX_DIFF:
+                return StrategoAI.HEURESTIC_MAX_DIFFERENCE;
+            case MAX_POINTS:
+                return StrategoAI.HEURESTIC_MAX_POINTS;
+        }
+        return -1;
+    }
+
+    public void onAIChecked1(){
+        chobxFirstPlayer.setDisable(!chbxAIP1.isSelected());
+    }
+
+    public void onAIChecked2(){
+        chobxSecondPlayer.setDisable(!chbxAIP2.isSelected());
     }
 }
