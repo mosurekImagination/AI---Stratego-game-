@@ -46,7 +46,7 @@ public class Controller {
             //lightField(x,y);
             updateStats();
             changeAccPlayer();
-            if(game.getCurrentPlayer() == game.FIRSTPTURN){
+            if(game.getCurrentPlayer() == game.FIRST_PLAYER){
                 getField(x,y).setFill(O_IMAGE);
             }
             else{
@@ -56,7 +56,7 @@ public class Controller {
     }
 
     private void changeAccPlayer() {
-        if(game.getCurrentPlayer() == game.FIRSTPTURN){
+        if(game.getCurrentPlayer() == game.FIRST_PLAYER){
             accPlayer.setFill(X_IMAGE);
         }
         else{
@@ -133,7 +133,7 @@ public class Controller {
     @FXML
     private void newGame(){
         gp.getChildren().clear();
-        game.newGame(Integer.valueOf(size.getText()));
+        game.newGame(Integer.valueOf(size.getText()), 0,0);
         gp.getColumnConstraints().clear();
         gp.getRowConstraints().clear();
         updateStats();
