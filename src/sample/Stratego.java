@@ -31,6 +31,7 @@ public class Stratego {
 
         //INIT AI CORE
         ai = new StrategoAI();
+        ai.setHeurestic_value(StrategoAI.HEURESTIC_MAX_POINTS);
     }
 
     public boolean makeMove(int x, int y){

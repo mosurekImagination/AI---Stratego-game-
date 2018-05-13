@@ -10,7 +10,7 @@ public class Node {
 
     int[][] board;
 
-    private int points;
+    private int[] points;
 
     int value=0;
     private int x;
@@ -18,6 +18,8 @@ public class Node {
     private int y;
     List<Node> childs;
     StrategoLogic logic;
+
+
     public Node(int [][]board){
         this.board = board;
         childs= new LinkedList<>();
@@ -104,12 +106,19 @@ public class Node {
         }
     }
 
-    public int getPoints() {
+    public int[] getPoints() {
         return points;
     }
 
-    public int setPoints(int points) {
-        return this.points = points;
+    public void setPoints(int points, boolean maximizePlayer) {
+       if(maximizePlayer) this.points[0] = points;
+       else {
+           this.points[1] = points;
+       }
+    }
+
+    public void setPoints(int[] points) {
+        this.points = points;
     }
 
     public int getX() {
