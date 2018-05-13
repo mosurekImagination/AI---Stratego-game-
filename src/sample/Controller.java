@@ -2,6 +2,7 @@ package sample;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
@@ -26,9 +27,15 @@ public class Controller {
     @FXML
     TextField size;
     @FXML
+    TextField tfDepth;
+    @FXML
     Rectangle accPlayer;
     @FXML
     Text Title;
+    @FXML
+    CheckBox chbxAIP1;
+    @FXML
+    CheckBox chbxAIP2;
 
     Stratego game;
     ArrayList<Rectangle> fields;
@@ -45,27 +52,41 @@ public class Controller {
         if(game.clickField(x,y)){
             //lightField(x,y);
             updateStats();
-            changeAccPlayer();
+            //System.out.println("CurrentPlayer: "+game.getCurrentPlayer());
             if(game.getCurrentPlayer() == game.FIRST_PLAYER){
                 getField(x,y).setFill(O_IMAGE);
             }
             else{
                 getField(x,y).setFill(X_IMAGE);
             }
+            onChangeAccPlayer();
         }
     }
 
-    private void changeAccPlayer() {
+    private void onChangeAccPlayer() {
         if(game.getCurrentPlayer() == game.FIRST_PLAYER){
             accPlayer.setFill(X_IMAGE);
         }
         else{
             accPlayer.setFill(O_IMAGE);
         }
+        makeAImove();
+    }
+
+    private void makeAImove() {
+        if(game.isAITurn()){
+            Touple move = game.getAImove();
+            onClick(move.x, move.y);
+        }
     }
 
     public void initialiseBoard(){
-        changeAccPlayer();
+        if(game.getCurrentPlayer() == game.FIRST_PLAYER){
+            accPlayer.setFill(X_IMAGE);
+        }
+        else{
+            accPlayer.setFill(O_IMAGE);
+        }
         Title.setText("Stratego");
         size.setText(String.valueOf(game.getSize()));
         gp.setGridLinesVisible(true);
@@ -133,10 +154,14 @@ public class Controller {
     @FXML
     private void newGame(){
         gp.getChildren().clear();
-        game.newGame(Integer.valueOf(size.getText()), 0,0);
+        int depth = tfDepth.getText() != null ? Integer.valueOf(tfDepth.getText()) : 0;
+        game.newGame(Integer.valueOf(size.getText()), chbxAIP1.isSelected(),chbxAIP2.isSelected(), depth);
         gp.getColumnConstraints().clear();
         gp.getRowConstraints().clear();
         updateStats();
         initialiseBoard();
+        if( chbxAIP1.isSelected()){
+            makeAImove();
+        }
     }
 }

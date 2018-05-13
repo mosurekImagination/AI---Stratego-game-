@@ -16,7 +16,7 @@ public class Stratego {
     public final int SECOND_PLAYER = 2;
     public final int DRAW = -1;
     public final int CUR_PLAYING = 0;
-    public final int[] ai_players; 
+    public final boolean[] ai_players;
     int[] points;
     int winner;
     int moves =0;
@@ -25,12 +25,12 @@ public class Stratego {
     public Stratego(int size){
         points = new int[2];
         board = new int[size][size];
-        ai_players = new int[2];
+        ai_players = new boolean[2];
         player = FIRST_PLAYER;
         winner = 0;
 
         //INIT AI CORE
-        ai = new StrategoAI(size);
+        ai = new StrategoAI();
     }
 
     public boolean makeMove(int x, int y){
@@ -48,28 +48,34 @@ public class Stratego {
                 countMove();
                 printBoard();
 
-                //AI INSTRUCTIONS
-//                if(isAIControlled(player)){
-//                    clickField(ai.getNextMove(board,))
-//                }
                 return true;
             }
         }
         return false;
     }
 
-    private boolean isAIControlled(int player) {
-        return ai_players[player-1] == 1;
+    public Touple getAImove(){
+        if(isAIControlled(player)){
+            Touple move = ai.getNextMove(board);
+            return move;
+        }
+        else{
+            return null;
+        }
     }
 
-    public void newGame(int size, int AI1PLAYER, int AI2PLAYER){
+    private boolean isAIControlled(int player) {
+        return ai_players[player-1];
+    }
+
+    public void newGame(int size, boolean AI1PLAYER, boolean AI2PLAYER, int depth){
         points = new int[2];
         board = new int[size][size];
 
         //INITIALISE WHICH PLAYER WILL BE CONTROLLED BY AI
         ai_players[0]=AI1PLAYER;
         ai_players[1]=AI2PLAYER;
-
+        ai.setDepth(depth);
         winner = 0;
         moves = 0;
 
@@ -94,11 +100,11 @@ public class Stratego {
         int sum2=0;
         int sum3=0;
         int sum4=0;
-        final int currpl = 0;
+        final int EMPTY = 0;
         //lewo, góra
         boolean isCorrect = true;
         for(int i=x-1, j=y-1; i>=0 && j >= 0 && isCorrect; i--, j--){
-            if(board[i][j] != currpl){
+            if(board[i][j] != EMPTY){
                 sum1++;
             }
             else{
@@ -108,7 +114,7 @@ public class Stratego {
         //prawo doł
         boolean isCorrect2 = true;
         for(int i=x+1, j=y+1; i<getSize() && j< getSize() && isCorrect2; i++, j++){
-            if(board[i][j] != currpl){
+            if(board[i][j] != EMPTY){
                 sum2++;
             }
             else{
@@ -121,7 +127,7 @@ public class Stratego {
 
         //lewo doł
         for(int i=x+1, j=y-1; i<getSize() && j>=0 && isCorrect; i++, j--){
-            if(board[i][j] != currpl){
+            if(board[i][j] != EMPTY){
                 sum3++;
             }
             else{
@@ -132,7 +138,7 @@ public class Stratego {
 
         //prawo góra
         for(int i=x-1, j=y+1; i>= 0 && j<getSize() && isCorrect2; i--, j++){
-            if(board[i][j] != currpl){
+            if(board[i][j] != EMPTY){
                 sum4++;
             }
             else{
@@ -145,26 +151,18 @@ public class Stratego {
 
     private int checkColumn(int y) {
         boolean connected = true;
-        if(getCurrentPlayer()==FIRST_PLAYER){
-            for(int i=0; i<getSize() && connected; i++){
-                connected = (board[i][y]!= 0);
-            }
-        }
-        if(getCurrentPlayer()==SECOND_PLAYER){
-            for(int i=0; i<getSize() && connected; i++){
-                connected = (board[i][y]!= 0);
-            }
+        
+        for(int i=0; i<getSize() && connected; i++){
+            connected = (board[i][y]!= 0);
         }
         return connected ? 1:0;
     }
     private int checkRow(int x){
         boolean connected = true;
-        if(getCurrentPlayer()==FIRST_PLAYER){
-            for(int i=0; i<getSize() && connected; i++){
-                connected = (board[x][i]!= 0);
-            }
-        }
 
+        for(int i=0; i<getSize() && connected; i++) {
+            connected = (board[x][i] != 0);
+        }
         return connected ? 1:0;
     }
 
@@ -213,6 +211,8 @@ public class Stratego {
     public boolean isEnd(){
         return moves == getSize()*getSize();
     }
-
+    public boolean isAITurn(){
+        return isAIControlled(player);
+    }
 
 }
