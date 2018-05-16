@@ -37,21 +37,6 @@ public class Stratego {
         timer = System.currentTimeMillis();
     }
 
-    public void setAiHeurestic(int heurestic){
-        ai.setHeurestic_value(heurestic);
-    }
-    public void setAiAlgorithm(int algorithm){
-        ai.setAlgorithm_type(algorithm);
-    }
-    public boolean makeMove(int x, int y){
-        return true;
-    }
-    public double getFirstPlayerTime(){
-        return FirstPlayerTime/1000;
-    }
-    public double getSecondPlayerTime(){
-        return SecondPlayerTime/1000;
-    }
     public boolean clickField(int x, int y){
         if(!isEnd()) {
             if (isTurnValid(x, y)) {
@@ -59,7 +44,7 @@ public class Stratego {
                 //GAME CORE INSTRUCTIONS
                 takeField(x, y);
                 checkLines(x, y);
-                endPlayerTimer(player);
+                //endPlayerTimer(player);
                 changePlayer();
                 countMove();
                 printBoard();
@@ -68,7 +53,6 @@ public class Stratego {
         }
         return false;
     }
-
     public void setAiHeurestic(int firstPHeurestic, int secondPHeurestic){
         if(!turnament_mode){
             turnament_mode = true;
@@ -78,6 +62,7 @@ public class Stratego {
         secondAi.setHeurestic_value(secondPHeurestic);
 
     }
+
     public void setAiAlgorithm(int firstPAlgorithm, int secondPAlgorithm){
         if(!turnament_mode){
             turnament_mode = true;
@@ -86,11 +71,11 @@ public class Stratego {
         ai.setAlgorithm_type(firstPAlgorithm);
         secondAi.setAlgorithm_type(secondPAlgorithm);
     }
-
     public void setDepths(int depth1AI, int depth2AI){
         ai.setDepth(depth1AI);
         secondAi.setDepth(depth2AI);
     }
+
     public void setDepth(int depth1AI){
         ai.setDepth(depth1AI);
     }
@@ -106,7 +91,6 @@ public class Stratego {
         }
         return move;
     }
-
     private boolean isAIControlled(int player) {
         return ai_players[player-1];
     }
@@ -139,9 +123,11 @@ public class Stratego {
         //INIT AI
         ai = new StrategoAI();
         ai.setHeurestic_value(StrategoAI.HEURESTIC_MAX_DIFFERENCE);
-        //ai.setDepth(depth);
 
-        turnament_mode = false;
+        if( AI1PLAYER && AI2PLAYER){
+            secondAi = new StrategoAI();
+        }
+        turnament_mode = AI1PLAYER && AI2PLAYER;
     }
 
     private void resetTimers() {
@@ -218,12 +204,13 @@ public class Stratego {
 
     private int checkColumn(int y) {
         boolean connected = true;
-        
+
         for(int i=0; i<getSize() && connected; i++){
             connected = (board[i][y]!= 0);
         }
         return connected ? 1:0;
     }
+
     private int checkRow(int x){
         boolean connected = true;
 
@@ -232,7 +219,6 @@ public class Stratego {
         }
         return connected ? 1:0;
     }
-
     private void takeField(int x, int y){
         board[x][y] = player;
     }
@@ -265,6 +251,7 @@ public class Stratego {
     public int getWinner() {
         return winner;
     }
+
     private void countMove(){
         moves++;
         if(isEnd()){
@@ -274,12 +261,27 @@ public class Stratego {
             }
         }
     }
-
     public boolean isEnd(){
         return moves == getSize()*getSize();
     }
+
     public boolean isAITurn(){
         return isAIControlled(player);
     }
 
+    public void setAiHeurestic(int heurestic){
+        ai.setHeurestic_value(heurestic);
+    }
+    public void setAiAlgorithm(int algorithm){
+        ai.setAlgorithm_type(algorithm);
+    }
+    public boolean makeMove(int x, int y){
+        return true;
+    }
+    public double getFirstPlayerTime(){
+        return FirstPlayerTime/1000;
+    }
+    public double getSecondPlayerTime(){
+        return SecondPlayerTime/1000;
+    }
 }

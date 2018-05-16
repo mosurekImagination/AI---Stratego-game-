@@ -71,14 +71,6 @@ public class StrategoAI {
     }
 
 
-    public void setHeurestic_value(int heurestic){
-        heurestic_value = heurestic;
-    }
-
-    public void setAlgorithm_type(int type){
-        algorithm_type = type;
-    }
-    
     public int alphaBeta(Node node, int depth, int alpha, int beta, boolean maximizingPlayer){
 
         //base case
@@ -123,4 +115,12 @@ public class StrategoAI {
         return -1;
     }
 
+
+    public void setHeurestic_value(int heurestic){
+        heurestic_value = heurestic;
+    }
+
+    public void setAlgorithm_type(int type){
+        algorithm_type = type;
+    }
 }

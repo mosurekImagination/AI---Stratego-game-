@@ -84,9 +84,7 @@ public class Controller {
     public void onClick(int x,int y){
         System.out.println("Kliknięto przycisk: "+x+" "+y);
         if(game.clickField(x,y)){
-            //lightField(x,y);
             updateStats();
-            //System.out.println("CurrentPlayer: "+game.getCurrentPlayer());
             if(game.getCurrentPlayer() == game.FIRST_PLAYER){
                 getField(x,y).setFill(O_IMAGE);
             }
@@ -139,7 +137,7 @@ public class Controller {
     }
 
     private void initAChoiceBox(ChoiceBox box) {
-        ObservableList<String> cursors = FXCollections.observableArrayList(MIN_MAX_SIMPLY, MIN_MAX_ALFABETA);
+        ObservableList<String> cursors = FXCollections.observableArrayList(MIN_MAX_ALFABETA, MIN_MAX_SIMPLY);
         box.setValue(cursors.get(0));
         box.setItems(cursors);
     }
@@ -205,8 +203,8 @@ public class Controller {
         X_Points.setText(String.valueOf(results[0]));
         O_Points.setText(String.valueOf(results[1]));
         if(game.getWinner()!=0){
-            tfFirstPlayerTime.setText(String.valueOf(game.getFirstPlayerTime()));
-            tfSecondPlayerTime.setText(String.valueOf(game.getSecondPlayerTime()));
+            tfFirstPlayerTime.setText(String.valueOf(game.getFirstPlayerTime()) + " s");
+            tfSecondPlayerTime.setText(String.valueOf(game.getSecondPlayerTime() + " s"));
         }
         if(game.getWinner() > 0){
             String winner = "Winner: "+(game.getWinner()==1?"X": "O");
