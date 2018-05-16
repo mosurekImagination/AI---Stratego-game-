@@ -17,7 +17,7 @@
     <children>
         <GridPane fx:id="gp" prefHeight="800.0" prefWidth="800.0">
 </GridPane>
-        <Pane maxWidth="682.0" prefHeight="800.0" prefWidth="600.0">
+        <Pane maxWidth="682.0" prefHeight="800.0" prefWidth="490.0">
             <children>
                 <Text fx:id="Title" fill="#5503cf" layoutX="119.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stratego" textAlignment="CENTER" wrappingWidth="299.99998211860657">
                     <font>
@@ -44,7 +44,7 @@
                         <Font name="BN Machine" size="28.0" />
                     </font>
                 </Text>
-                <Text fill="#5503cf" layoutX="1.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Punktacja:" textAlignment="CENTER" wrappingWidth="299.99998211860657">
+                <Text fill="#5503cf" layoutX="1.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score board:" textAlignment="CENTER" wrappingWidth="299.99998211860657">
                     <font>
                         <Font size="27.0" />
                     </font>
@@ -52,7 +52,7 @@
                 <Button layoutX="401.0" layoutY="764.0" mnemonicParsing="false" onAction="#exit" text="Wyjście" />
                 <Button layoutX="208.0" layoutY="764.0" mnemonicParsing="false" text="Useless Button" />
                 <Button layoutX="34.0" layoutY="764.0" mnemonicParsing="false" onAction="#newGame" text="Nowa Gra" />
-                <Text fill="#5503cf" layoutX="140.0" layoutY="437.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ustawienia:" textAlignment="CENTER" wrappingWidth="234.4000370502472">
+                <Text fill="#5503cf" layoutX="140.0" layoutY="437.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Settings:" textAlignment="CENTER" wrappingWidth="234.4000370502472">
                     <font>
                         <Font size="27.0" />
                     </font>
@@ -70,18 +70,18 @@
             <CheckBox fx:id="chbxAIP1" layoutX="237.0" layoutY="561.0" mnemonicParsing="false" onAction="#onAIChecked1" />
             <CheckBox fx:id="chbxAIP2" layoutX="384.0" layoutY="561.0" mnemonicParsing="false" onAction="#onAIChecked2" selected="true" />
                 <TextField fx:id="size" alignment="CENTER" layoutX="219.0" layoutY="478.0" prefHeight="26.0" prefWidth="55.0" text="1" />
-                <Text fill="#5503cf" layoutX="340.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aktualny gracz:" textAlignment="CENTER" wrappingWidth="122.40000653266907">
+                <Text fill="#5503cf" layoutX="340.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Acc player:" textAlignment="CENTER" wrappingWidth="122.40000653266907">
                     <font>
                         <Font size="16.0" />
                     </font>
                 </Text>
                 <Rectangle fx:id="accPlayer" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" layoutX="371.0" layoutY="193.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
-            <Text fill="#5503cf" layoutX="210.0" layoutY="540.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gracz 1:" textAlignment="CENTER" wrappingWidth="72.58201637864113">
+            <Text fill="#5503cf" layoutX="210.0" layoutY="540.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 1:" textAlignment="CENTER" wrappingWidth="72.58201637864113">
                <font>
                   <Font size="16.0" />
                </font>
             </Text>
-            <Text fill="#5503cf" layoutX="358.0" layoutY="539.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gracz 2:" textAlignment="CENTER" wrappingWidth="72.58201637864113">
+            <Text fill="#5503cf" layoutX="358.0" layoutY="539.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 2:" textAlignment="CENTER" wrappingWidth="72.58201637864113">
                <font>
                   <Font size="16.0" />
                </font>
@@ -98,7 +98,7 @@
                   <Image url="@images/X.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="36.0" fitWidth="34.0" layoutX="327.0" layoutY="515.0">
+            <ImageView fitHeight="36.0" fitWidth="34.0" layoutX="323.0" layoutY="516.0">
                <image>
                   <Image url="@images/circle.png" />
                </image>
@@ -129,27 +129,27 @@
             </Text>
             <ChoiceBox fx:id="chobxFirstPlayerS" disable="true" layoutX="172.0" layoutY="686.0" prefHeight="22.0" prefWidth="134.0" />
             <ChoiceBox fx:id="chobxSecondPlayerS" layoutX="329.0" layoutY="686.0" prefHeight="22.0" prefWidth="134.0" />
-            <Text fill="#5503cf" layoutX="306.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TIME USED BY :" textAlignment="CENTER" wrappingWidth="122.40000653266907">
+            <Text fill="#5503cf" layoutX="333.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TIME USED BY :" textAlignment="CENTER" wrappingWidth="122.40000653266907">
                <font>
                   <Font size="16.0" />
                </font>
             </Text>
-            <Text fill="#5503cf" layoutX="263.0" layoutY="344.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gracz 1:" textAlignment="CENTER" wrappingWidth="72.58201637864113">
+            <Text fill="#5503cf" layoutX="290.0" layoutY="344.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 1:" textAlignment="CENTER" wrappingWidth="72.58201637864113">
                <font>
                   <Font size="16.0" />
                </font>
             </Text>
-            <Text fill="#5503cf" layoutX="263.0" layoutY="382.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gracz 2:" textAlignment="CENTER" wrappingWidth="72.58201637864113">
+            <Text fill="#5503cf" layoutX="290.0" layoutY="382.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 2:" textAlignment="CENTER" wrappingWidth="72.58201637864113">
                <font>
                   <Font size="16.0" />
                </font>
             </Text>
-            <Text fx:id="tfSecondPlayerTime" fill="#5503cf" layoutX="358.0" layoutY="381.0" strokeType="OUTSIDE" strokeWidth="0.0" text="---" textAlignment="CENTER" wrappingWidth="72.58201637864113">
+            <Text fx:id="tfSecondPlayerTime" fill="#5503cf" layoutX="385.0" layoutY="381.0" strokeType="OUTSIDE" strokeWidth="0.0" text="---" textAlignment="CENTER" wrappingWidth="72.58201637864113">
                <font>
                   <Font size="16.0" />
                </font>
             </Text>
-            <Text fx:id="tfFirstPlayerTime" fill="#5503cf" layoutX="358.0" layoutY="343.0" strokeType="OUTSIDE" strokeWidth="0.0" text="---" textAlignment="CENTER" wrappingWidth="72.58201637864113">
+            <Text fx:id="tfFirstPlayerTime" fill="#5503cf" layoutX="385.0" layoutY="343.0" strokeType="OUTSIDE" strokeWidth="0.0" text="---" textAlignment="CENTER" wrappingWidth="72.58201637864113">
                <font>
                   <Font size="16.0" />
                </font>
