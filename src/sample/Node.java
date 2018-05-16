@@ -36,8 +36,8 @@ public class Node {
     }
 
     public int getEarnedPoints(){
-        if(x==-1 || y ==-1) return 0;
-        return logic.getPoints(x,y);
+        //if root (no points gained)
+        return x==-1 || y ==-1 ? 0 : logic.getPoints(x,y);
     }
 
     //function used to create Node Childs
@@ -95,7 +95,6 @@ public class Node {
                 index = childs.indexOf(child);
             }
         }
-
         return childs.get(index);
     }
 

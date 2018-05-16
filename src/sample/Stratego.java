@@ -35,6 +35,9 @@ public class Stratego {
     public void setAiHeurestic(int heurestic){
         ai.setHeurestic_value(heurestic);
     }
+    public void setAiAlgorithm(int algorithm){
+        ai.setAlgorithm_type(algorithm);
+    }
     public boolean makeMove(int x, int y){
         return true;
     }
@@ -64,6 +67,19 @@ public class Stratego {
         ai.setHeurestic_value(firstPHeurestic);
         secondAi.setHeurestic_value(secondPHeurestic);
 
+    }
+    public void setAiAlgorithm(int firstPAlgorithm, int secondPAlgorithm){
+        if(!turnament_mode){
+            turnament_mode = true;
+            secondAi = new StrategoAI();
+        }
+        ai.setAlgorithm_type(firstPAlgorithm);
+        secondAi.setAlgorithm_type(secondPAlgorithm);
+    }
+
+    public void setDepths(int depth1AI, int depth2AI){
+        ai.setDepth(depth1AI);
+        secondAi.setDepth(depth2AI);
     }
     public Touple getAImove(){
         Touple move = null;

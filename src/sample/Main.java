@@ -4,12 +4,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -22,7 +16,7 @@ public class Main extends Application {
         Controller controller = (Controller)loader.getController();
         controller.setStratego(new Stratego(3));
         controller.initialiseBoard();
-        controller.initialiseAIChoiceBox();
+        controller.initialiseAIChoiceBoxes();
 
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root));
