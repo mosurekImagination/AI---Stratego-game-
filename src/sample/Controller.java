@@ -22,31 +22,47 @@ public class Controller {
     @FXML
     GridPane gp;
     @FXML
+    Text tThinking; // not working TO DO
+    @FXML
     Text O_Points;
     @FXML
     Text X_Points;
     @FXML
-    TextField size;
-    @FXML
-    TextField tfDepth;
-    @FXML
     Rectangle accPlayer;
     @FXML
+    TextField size;
+    @FXML
     Text Title;
+    @FXML
+    Text tfFirstPlayerTime;
+    @FXML
+    Text tfSecondPlayerTime;
+
+    //Game settings inputs
     @FXML
     CheckBox chbxAIP1;
     @FXML
     CheckBox chbxAIP2;
-    @FXML
-    Text tThinking;
+
     @FXML
     ChoiceBox chobxFirstPlayerH;
     @FXML
     ChoiceBox chobxSecondPlayerH;
+
     @FXML
     ChoiceBox chobxFirstPlayerA;
     @FXML
     ChoiceBox chobxSecondPlayerA;
+
+    @FXML
+    TextField tfFirstPlayerDepth;
+    @FXML
+    TextField tfSecondPlayerDepth;
+
+    @FXML
+    ChoiceBox chobxFirstPlayerS;
+    @FXML
+    ChoiceBox chobxSecondPlayerS;
 
     Stratego game;
     ArrayList<Rectangle> fields;
@@ -188,6 +204,10 @@ public class Controller {
         int[] results = game.getPoints();
         X_Points.setText(String.valueOf(results[0]));
         O_Points.setText(String.valueOf(results[1]));
+        if(game.getWinner()!=0){
+            tfFirstPlayerTime.setText(String.valueOf(game.getFirstPlayerTime()));
+            tfSecondPlayerTime.setText(String.valueOf(game.getSecondPlayerTime()));
+        }
         if(game.getWinner() > 0){
             String winner = "Winner: "+(game.getWinner()==1?"X": "O");
             Title.setText(winner);
@@ -207,8 +227,7 @@ public class Controller {
     private void newGame(){
         //CLEAR GAME TABLE
         gp.getChildren().clear();
-        int depth = tfDepth.getText() != null ? Integer.valueOf(tfDepth.getText()) : 0;
-        game.newGame(Integer.valueOf(size.getText()), chbxAIP1.isSelected(),chbxAIP2.isSelected(), depth);
+        game.newGame(Integer.valueOf(size.getText()), chbxAIP1.isSelected(),chbxAIP2.isSelected());
         gp.getColumnConstraints().clear();
         gp.getRowConstraints().clear();
         updateStats();
@@ -220,7 +239,8 @@ public class Controller {
                     getHeuristic((String) chobxFirstPlayerH.getValue()), getHeuristic((String) chobxSecondPlayerH.getValue()));
             game.setAiAlgorithm(
                     getAlgorithmType((String) chobxFirstPlayerA.getValue()), getAlgorithmType((String) chobxSecondPlayerA.getValue()));
-            game.setDepths(depth,depth);
+            game.setDepths(tfFirstPlayerDepth.getText() != null ? Integer.valueOf(tfFirstPlayerDepth.getText()) : 0,
+                    tfSecondPlayerDepth.getText() != null ? Integer.valueOf(tfSecondPlayerDepth.getText()) : 0);
             makeAImove();
         }
 
@@ -228,11 +248,13 @@ public class Controller {
         else if(chbxAIP2.isSelected()){
             game.setAiHeurestic(getHeuristic((String) chobxSecondPlayerH.getValue()));
             game.setAiAlgorithm(getAlgorithmType((String) chobxSecondPlayerA.getValue()));
+            game.setDepth(tfSecondPlayerDepth.getText() != null ? Integer.valueOf(tfSecondPlayerDepth.getText()) : 0);
             makeAImove();
         }
         else if(chbxAIP1.isSelected()){
             game.setAiHeurestic(getHeuristic((String) chobxFirstPlayerH.getValue()));
             game.setAiAlgorithm(getAlgorithmType((String) chobxFirstPlayerA.getValue()));
+            game.setDepth(tfFirstPlayerDepth.getText() != null ? Integer.valueOf(tfFirstPlayerDepth.getText()) : 0);
             makeAImove();
         }
     }
@@ -263,11 +285,15 @@ public class Controller {
     public void onAIChecked1(){
         chobxFirstPlayerH.setDisable(!chbxAIP1.isSelected());
         chobxFirstPlayerA.setDisable(!chbxAIP1.isSelected());
+        chobxFirstPlayerS.setDisable(!chbxAIP1.isSelected());
+        tfFirstPlayerDepth.setDisable(!chbxAIP1.isSelected());
     }
 
     //2 CHOICE BOX LISTENER
     public void onAIChecked2(){
         chobxSecondPlayerH.setDisable(!chbxAIP2.isSelected());
         chobxSecondPlayerA.setDisable(!chbxAIP2.isSelected());
+        chobxSecondPlayerS.setDisable(!chbxAIP2.isSelected());
+        tfSecondPlayerDepth.setDisable(!chbxAIP2.isSelected());
     }
 }

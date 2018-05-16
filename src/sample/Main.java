@@ -18,7 +18,7 @@ public class Main extends Application {
         controller.initialiseBoard();
         controller.initialiseAIChoiceBoxes();
 
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("STRATEGO GAME - COPYRIGHT C BY TOMASZ MOSUR");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }

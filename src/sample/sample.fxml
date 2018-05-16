@@ -19,27 +19,27 @@
 </GridPane>
         <Pane maxWidth="682.0" prefHeight="800.0" prefWidth="600.0">
             <children>
-                <Text fx:id="Title" fill="#5503cf" layoutX="1.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stratego" textAlignment="CENTER" wrappingWidth="299.99998211860657">
+                <Text fx:id="Title" fill="#5503cf" layoutX="119.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stratego" textAlignment="CENTER" wrappingWidth="299.99998211860657">
                     <font>
                         <Font size="60.0" />
                     </font>
                 </Text>
-                <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="24.0" layoutY="167.0">
+                <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="58.0" layoutY="167.0">
                     <image>
                         <Image url="@images/circle.png" />
                     </image>
                 </ImageView>
-                <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="24.0" layoutY="288.0">
+                <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="58.0" layoutY="288.0">
                     <image>
                         <Image url="@images/X.png" />
                     </image>
                 </ImageView>
-                <Text fx:id="O_Points" layoutX="181.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                <Text fx:id="O_Points" layoutX="215.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                     <font>
                         <Font name="BN Machine" size="28.0" />
                     </font>
                 </Text>
-                <Text fx:id="X_Points" layoutX="181.0" layoutY="342.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                <Text fx:id="X_Points" layoutX="215.0" layoutY="342.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                     <font>
                         <Font name="BN Machine" size="28.0" />
                     </font>
@@ -49,74 +49,107 @@
                         <Font size="27.0" />
                     </font>
                 </Text>
-                <Button layoutX="212.0" layoutY="743.0" mnemonicParsing="false" onAction="#exit" text="Wyjście" />
-                <Button layoutX="109.0" layoutY="742.0" mnemonicParsing="false" text="Useless Button" />
-                <Button layoutX="25.0" layoutY="743.0" mnemonicParsing="false" onAction="#newGame" text="Nowa Gra" />
-                <Text fill="#5503cf" layoutX="-10.0" layoutY="429.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Menu:" textAlignment="CENTER" wrappingWidth="299.99998211860657">
+                <Button layoutX="401.0" layoutY="764.0" mnemonicParsing="false" onAction="#exit" text="Wyjście" />
+                <Button layoutX="208.0" layoutY="764.0" mnemonicParsing="false" text="Useless Button" />
+                <Button layoutX="34.0" layoutY="764.0" mnemonicParsing="false" onAction="#newGame" text="Nowa Gra" />
+                <Text fill="#5503cf" layoutX="140.0" layoutY="437.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ustawienia:" textAlignment="CENTER" wrappingWidth="234.4000370502472">
                     <font>
                         <Font size="27.0" />
                     </font>
                 </Text>
-                <Text fill="#5503cf" layoutX="16.0" layoutY="658.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rozmiar planszy:" textAlignment="CENTER" wrappingWidth="122.40000653266907">
+                <Text fill="#5503cf" layoutX="44.0" layoutY="496.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BOARD SIZE :" textAlignment="CENTER" wrappingWidth="122.40000653266907">
                     <font>
                         <Font size="16.0" />
                     </font>
                 </Text>
-                <Text fill="#5503cf" layoutX="73.0" layoutY="537.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AI:" textAlignment="CENTER" wrappingWidth="122.40000653266907">
+                <Text fill="#5503cf" layoutX="41.0" layoutY="575.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AI:" textAlignment="CENTER" wrappingWidth="122.40000653266907">
                     <font>
                         <Font size="16.0" />
                     </font>
                 </Text>
-            <CheckBox fx:id="chbxAIP1" layoutX="126.0" layoutY="562.0" mnemonicParsing="false" onAction="#onAIChecked1" />
-            <CheckBox fx:id="chbxAIP2" layoutX="125.0" layoutY="601.0" mnemonicParsing="false" onAction="#onAIChecked2" selected="true" />
-                <TextField fx:id="size" layoutX="178.0" layoutY="638.0" prefHeight="26.0" prefWidth="55.0" text="1" />
-                <Text fill="#5503cf" layoutX="16.0" layoutY="706.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aktualny gracz:" textAlignment="CENTER" wrappingWidth="122.40000653266907">
+            <CheckBox fx:id="chbxAIP1" layoutX="237.0" layoutY="561.0" mnemonicParsing="false" onAction="#onAIChecked1" />
+            <CheckBox fx:id="chbxAIP2" layoutX="384.0" layoutY="561.0" mnemonicParsing="false" onAction="#onAIChecked2" selected="true" />
+                <TextField fx:id="size" alignment="CENTER" layoutX="219.0" layoutY="478.0" prefHeight="26.0" prefWidth="55.0" text="1" />
+                <Text fill="#5503cf" layoutX="340.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aktualny gracz:" textAlignment="CENTER" wrappingWidth="122.40000653266907">
                     <font>
                         <Font size="16.0" />
                     </font>
                 </Text>
-                <Rectangle fx:id="accPlayer" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="46.0" layoutX="179.0" layoutY="676.0" stroke="BLACK" strokeType="INSIDE" width="56.0" />
-            <Text fill="#5503cf" layoutX="16.0" layoutY="575.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gracz 1:" textAlignment="CENTER" wrappingWidth="72.58201637864113">
+                <Rectangle fx:id="accPlayer" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" layoutX="371.0" layoutY="193.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Text fill="#5503cf" layoutX="210.0" layoutY="540.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gracz 1:" textAlignment="CENTER" wrappingWidth="72.58201637864113">
                <font>
                   <Font size="16.0" />
                </font>
             </Text>
-            <Text fill="#5503cf" layoutX="16.0" layoutY="614.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gracz 2:" textAlignment="CENTER" wrappingWidth="72.58201637864113">
+            <Text fill="#5503cf" layoutX="358.0" layoutY="539.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gracz 2:" textAlignment="CENTER" wrappingWidth="72.58201637864113">
                <font>
                   <Font size="16.0" />
                </font>
             </Text>
-            <Text fill="#5503cf" layoutX="8.0" layoutY="476.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Głębokość drzewa:" textAlignment="CENTER" wrappingWidth="133.59995770454407">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Text>
-            <TextField fx:id="tfDepth" layoutX="170.0" layoutY="458.0" prefHeight="26.0" prefWidth="55.0" text="5" />
             <Text fx:id="tThinking" fill="#5503cf" layoutX="-1.0" layoutY="8.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-Myślę-" textAlignment="CENTER" visible="false" wrappingWidth="299.99998211860657">
                <font>
                   <Font size="60.0" />
                </font>
             </Text>
-            <ChoiceBox fx:id="chobxFirstPlayerH" disable="true" layoutX="156.0" layoutY="559.0" prefHeight="22.0" prefWidth="134.0" />
-            <ChoiceBox fx:id="chobxSecondPlayerH" layoutX="157.0" layoutY="598.0" prefHeight="22.0" prefWidth="134.0" />
-            <ImageView fitHeight="26.0" fitWidth="27.0" layoutX="84.0" layoutY="557.0">
+            <ChoiceBox fx:id="chobxFirstPlayerH" disable="true" layoutX="175.0" layoutY="602.0" prefHeight="22.0" prefWidth="134.0" />
+            <ChoiceBox fx:id="chobxSecondPlayerH" layoutX="327.0" layoutY="602.0" prefHeight="22.0" prefWidth="134.0" />
+            <ImageView fitHeight="26.0" fitWidth="27.0" layoutX="180.0" layoutY="521.0">
                <image>
                   <Image url="@images/X.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="36.0" fitWidth="34.0" layoutX="81.0" layoutY="591.0">
+            <ImageView fitHeight="36.0" fitWidth="34.0" layoutX="327.0" layoutY="515.0">
                <image>
                   <Image url="@images/circle.png" />
                </image>
             </ImageView>
-            <ChoiceBox fx:id="chobxFirstPlayerA" disable="true" layoutX="308.0" layoutY="560.0" prefHeight="22.0" prefWidth="134.0" />
-            <ChoiceBox fx:id="chobxSecondPlayerA" layoutX="308.0" layoutY="599.0" prefHeight="22.0" prefWidth="134.0" />
-            <Text fill="#5503cf" layoutX="162.0" layoutY="536.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HEURESTC:" textAlignment="CENTER" wrappingWidth="122.40000653266907">
+            <ChoiceBox fx:id="chobxFirstPlayerA" disable="true" layoutX="175.0" layoutY="642.0" prefHeight="22.0" prefWidth="134.0" />
+            <ChoiceBox fx:id="chobxSecondPlayerA" layoutX="327.0" layoutY="642.0" prefHeight="22.0" prefWidth="134.0" />
+            <Text fill="#5503cf" layoutX="41.0" layoutY="618.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HEURESTC:" textAlignment="CENTER" wrappingWidth="122.40000653266907">
                <font>
                   <Font size="16.0" />
                </font>
             </Text>
-            <Text fill="#5503cf" layoutX="313.0" layoutY="537.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ALGORITHM:" textAlignment="CENTER" wrappingWidth="122.40000653266907">
+            <Text fill="#5503cf" layoutX="41.0" layoutY="659.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ALGORITHM:" textAlignment="CENTER" wrappingWidth="122.40000653266907">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Text fill="#5503cf" layoutX="48.0" layoutY="742.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DEPTH:" textAlignment="CENTER" wrappingWidth="122.40000653266907">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <TextField fx:id="tfFirstPlayerDepth" alignment="CENTER" disable="true" layoutX="214.0" layoutY="724.0" prefHeight="26.0" prefWidth="55.0" text="5" />
+            <TextField fx:id="tfSecondPlayerDepth" alignment="CENTER" layoutX="367.0" layoutY="724.0" prefHeight="26.0" prefWidth="55.0" text="5" />
+            <Text fill="#5503cf" layoutX="39.0" layoutY="702.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SEARCH ORDER:" textAlignment="CENTER" wrappingWidth="122.40000653266907">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <ChoiceBox fx:id="chobxFirstPlayerS" disable="true" layoutX="172.0" layoutY="686.0" prefHeight="22.0" prefWidth="134.0" />
+            <ChoiceBox fx:id="chobxSecondPlayerS" layoutX="329.0" layoutY="686.0" prefHeight="22.0" prefWidth="134.0" />
+            <Text fill="#5503cf" layoutX="306.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TIME USED BY :" textAlignment="CENTER" wrappingWidth="122.40000653266907">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Text fill="#5503cf" layoutX="263.0" layoutY="344.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gracz 1:" textAlignment="CENTER" wrappingWidth="72.58201637864113">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Text fill="#5503cf" layoutX="263.0" layoutY="382.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gracz 2:" textAlignment="CENTER" wrappingWidth="72.58201637864113">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="tfSecondPlayerTime" fill="#5503cf" layoutX="358.0" layoutY="381.0" strokeType="OUTSIDE" strokeWidth="0.0" text="---" textAlignment="CENTER" wrappingWidth="72.58201637864113">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="tfFirstPlayerTime" fill="#5503cf" layoutX="358.0" layoutY="343.0" strokeType="OUTSIDE" strokeWidth="0.0" text="---" textAlignment="CENTER" wrappingWidth="72.58201637864113">
                <font>
                   <Font size="16.0" />
                </font>
