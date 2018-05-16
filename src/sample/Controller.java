@@ -76,6 +76,9 @@ public class Controller {
     static final String MIN_MAX_SIMPLY = "SIMPLY MIN-MAX";
     static final String MIN_MAX_ALFABETA = "ALFA BETA MIN-MAX";
 
+    static final String ORDER_TAKE_FIRST = "TAKE FIRST";
+    static final String ORDER_TAKE_RANDOM = "TAKE RANDOM";
+
     public void setStratego(Stratego str){
         game = str;
     }
@@ -127,6 +130,14 @@ public class Controller {
         initHChoiceBox(chobxSecondPlayerH);
         initAChoiceBox(chobxFirstPlayerA);
         initAChoiceBox(chobxSecondPlayerA);
+        initOChoiceBox(chobxFirstPlayerS);
+        initOChoiceBox(chobxSecondPlayerS);
+    }
+
+    private void initOChoiceBox(ChoiceBox box) {
+        ObservableList<String> cursors = FXCollections.observableArrayList(ORDER_TAKE_FIRST, ORDER_TAKE_RANDOM);
+        box.setValue(cursors.get(0));
+        box.setItems(cursors);
     }
 
     //HEURESTIC CHOICE BOX
@@ -239,6 +250,8 @@ public class Controller {
                     getAlgorithmType((String) chobxFirstPlayerA.getValue()), getAlgorithmType((String) chobxSecondPlayerA.getValue()));
             game.setDepths(tfFirstPlayerDepth.getText() != null ? Integer.valueOf(tfFirstPlayerDepth.getText()) : 0,
                     tfSecondPlayerDepth.getText() != null ? Integer.valueOf(tfSecondPlayerDepth.getText()) : 0);
+            game.setOrderTypes(
+                    getOrderType((String) chobxFirstPlayerS.getValue()), getOrderType((String) chobxSecondPlayerS.getValue()));
             makeAImove();
         }
 
@@ -247,12 +260,14 @@ public class Controller {
             game.setAiHeurestic(getHeuristic((String) chobxSecondPlayerH.getValue()));
             game.setAiAlgorithm(getAlgorithmType((String) chobxSecondPlayerA.getValue()));
             game.setDepth(tfSecondPlayerDepth.getText() != null ? Integer.valueOf(tfSecondPlayerDepth.getText()) : 0);
+            game.setOrderType(getOrderType((String) chobxSecondPlayerS.getValue()));
             makeAImove();
         }
         else if(chbxAIP1.isSelected()){
             game.setAiHeurestic(getHeuristic((String) chobxFirstPlayerH.getValue()));
             game.setAiAlgorithm(getAlgorithmType((String) chobxFirstPlayerA.getValue()));
             game.setDepth(tfFirstPlayerDepth.getText() != null ? Integer.valueOf(tfFirstPlayerDepth.getText()) : 0);
+            game.setOrderType(getOrderType((String) chobxFirstPlayerS.getValue()));
             makeAImove();
         }
     }
@@ -275,6 +290,16 @@ public class Controller {
                 return StrategoAI.TYPE_MIN_MAX_SIMPLY;
             case MIN_MAX_ALFABETA:
                 return StrategoAI.TYPE_MIN_MAX_ALFABETA;
+        }
+        return -1;
+    }
+
+    private int getOrderType(String order) {
+        switch (order) {
+            case ORDER_TAKE_FIRST:
+                return StrategoAI.ORDER_TAKE_FIRST;
+            case ORDER_TAKE_RANDOM:
+                return StrategoAI.ORDER_TAKE_RANDOM;
         }
         return -1;
     }

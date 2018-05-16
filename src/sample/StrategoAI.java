@@ -10,8 +10,8 @@ import java.util.List;
 public class StrategoAI {
 
     public int DEPTH;
-    private int heurestic_value;
 
+    private int heurestic_value;
     public static final int HEURESTIC_MAX_POINTS = 1;
     public static final int HEURESTIC_MAX_DIFFERENCE = 2;
 
@@ -19,6 +19,10 @@ public class StrategoAI {
     public static final int TYPE_MIN_MAX_SIMPLY = 1;
     public static final int TYPE_MIN_MAX_ALFABETA = 2;
 
+    private int order_type;
+    public static final int ORDER_TAKE_FIRST = 1;
+    public static final int ORDER_TAKE_RANDOM = 2;
+    
     Node root;
 
     public void setDepth(int depth){
@@ -47,7 +51,7 @@ public class StrategoAI {
 
         //initialise necessary things for algorithm
         int bestValue;
-        List<Node> children = node.getChilds();
+        List<Node> children = getChildrenHeuristic(node);
 
         if(maximizingPlayer){
             bestValue = Integer.MIN_VALUE;
@@ -78,7 +82,7 @@ public class StrategoAI {
             return getHeuresticValue(node);
         }
 
-        List<Node> children = node.getChilds();
+        List<Node> children = getChildrenHeuristic(node);
         //Maximizing Player
         if(maximizingPlayer){
             for (Node n:children) {
@@ -104,6 +108,18 @@ public class StrategoAI {
         }
     }
 
+    private List<Node> getChildrenHeuristic(Node node) {
+        List<Node> childs = node.getChilds();
+        if(order_type==ORDER_TAKE_FIRST) {
+            return childs;
+        }
+        else if(order_type==ORDER_TAKE_RANDOM){
+            childs = node.getChilds();
+            Collections.shuffle(childs);
+        }
+        return childs;
+    }
+
     private int getHeuresticValue(Node node) {
         if(heurestic_value == HEURESTIC_MAX_POINTS){
             return node.getMinimisePlayerScore();
@@ -123,4 +139,9 @@ public class StrategoAI {
     public void setAlgorithm_type(int type){
         algorithm_type = type;
     }
+
+    public void setOrderType(int orderType){
+        order_type = orderType;
+    }
+
 }

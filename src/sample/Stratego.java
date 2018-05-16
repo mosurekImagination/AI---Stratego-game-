@@ -44,7 +44,7 @@ public class Stratego {
                 //GAME CORE INSTRUCTIONS
                 takeField(x, y);
                 checkLines(x, y);
-                //endPlayerTimer(player);
+                endPlayerTimer(player);
                 changePlayer();
                 countMove();
                 printBoard();
@@ -283,5 +283,14 @@ public class Stratego {
     }
     public double getSecondPlayerTime(){
         return SecondPlayerTime/1000;
+    }
+
+    public void setOrderType(int orderType){
+        ai.setOrderType(orderType);
+    }
+
+    public void setOrderTypes(int firstPlayerOrderType, int secondPlayerOrderType){
+        ai.setOrderType(firstPlayerOrderType);
+        secondAi.setOrderType(secondPlayerOrderType);
     }
 }
