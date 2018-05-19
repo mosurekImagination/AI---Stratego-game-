@@ -275,20 +275,21 @@ public class Stratego {
     public void setAiAlgorithm(int algorithm){
         ai.setAlgorithm_type(algorithm);
     }
-    public boolean makeMove(int x, int y){
-        return true;
-    }
     public double getFirstPlayerTime(){
         return FirstPlayerTime/1000;
     }
     public double getSecondPlayerTime(){
         return SecondPlayerTime/1000;
     }
-
     public void setOrderType(int orderType){
         ai.setOrderType(orderType);
     }
-
+    public void setMaxTime(double time){
+        if(ai != null)
+            ai.setMaxTimeForMove(time);
+        if(secondAi != null)
+            secondAi.setMaxTimeForMove(time);
+    }
     public void setOrderTypes(int firstPlayerOrderType, int secondPlayerOrderType){
         ai.setOrderType(firstPlayerOrderType);
         secondAi.setOrderType(secondPlayerOrderType);

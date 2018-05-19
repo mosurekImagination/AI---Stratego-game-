@@ -1,9 +1,6 @@
 package sample;
 
-import jdk.jshell.spi.ExecutionControl;
-
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.sql.SQLOutput;
 import java.util.Collections;
 import java.util.List;
 
@@ -22,9 +19,14 @@ public class StrategoAI {
     private int order_type;
     public static final int ORDER_TAKE_FIRST = 1;
     public static final int ORDER_TAKE_RANDOM = 2;
-    
-    Node root;
 
+    Node root;
+    private long maxTimeForMove = Integer.MAX_VALUE;
+    private long startMoveTime;
+
+    public void setMaxTimeForMove(double time){
+        this.maxTimeForMove = (long)(time*1000);
+    }
     public void setDepth(int depth){
         this.DEPTH = depth;
     }
@@ -32,6 +34,7 @@ public class StrategoAI {
     public Touple getNextMove(int[][] board){
         root = new Node(board);
         root.setPoints(0,0);
+        startMoveTime();
         if(algorithm_type == TYPE_MIN_MAX_ALFABETA) {
             alphaBeta(root, DEPTH, Integer.MIN_VALUE, Integer.MAX_VALUE, true);
         }
@@ -42,10 +45,14 @@ public class StrategoAI {
         return new Touple(bestNode.getX(), bestNode.getY());
     }
 
+    private void startMoveTime() {
+        startMoveTime = System.currentTimeMillis();
+    }
+
     private int minMax(Node node, int depth, boolean maximizingPlayer) {
 
         //base case
-        if(depth==0 || node.isTerminal()){
+        if(depth==0 || node.isTerminal() || timeExceeded(depth)){
             return getHeuresticValue(node);
         }
 
@@ -56,6 +63,7 @@ public class StrategoAI {
         if(maximizingPlayer){
             bestValue = Integer.MIN_VALUE;
             for (Node n:children) {
+                if(timeExceeded(depth)) break;
                 //set points (maxPlayer + new Points, minPlayer)
                 n.setPoints(node.getMaximizePlayerScore()+n.getEarnedPoints(), node.getMinimisePlayerScore());
                 bestValue=Math.max(bestValue, minMax(n, depth-1, false));
@@ -65,6 +73,8 @@ public class StrategoAI {
             bestValue = Integer.MAX_VALUE;
 
             for (Node n:children) {
+                if(timeExceeded(depth)) break;
+
                 //set points (maxPlayer, minPlayer + new Points)
                 n.setPoints(node.getMaximizePlayerScore(), node.getMinimisePlayerScore()+n.getEarnedPoints());
                 bestValue=Math.min(bestValue, minMax(n, depth-1, true));
@@ -74,11 +84,19 @@ public class StrategoAI {
         return bestValue;
     }
 
+    private boolean timeExceeded(int depth) {
+        if(System.currentTimeMillis()-startMoveTime > maxTimeForMove){
+            System.out.println("Przekroczono czas na ruch na poziomie: " + depth);
+            return true;
+        }
+        return false;
+    }
+
 
     public int alphaBeta(Node node, int depth, int alpha, int beta, boolean maximizingPlayer){
 
         //base case
-        if(depth==0 || node.isTerminal()){
+        if(depth==0 || node.isTerminal() || timeExceeded(depth)){
             return getHeuresticValue(node);
         }
 
@@ -86,6 +104,8 @@ public class StrategoAI {
         //Maximizing Player
         if(maximizingPlayer){
             for (Node n:children) {
+                //if(timeExceeded(depth)) break;
+
                 n.setPoints(node.getMaximizePlayerScore() + n.getEarnedPoints(),node.getMinimisePlayerScore());
                 alpha = Math.max(alpha,alphaBeta(n,depth-1, alpha, beta, false));
                 if(alpha >= beta)
@@ -98,6 +118,8 @@ public class StrategoAI {
         //Minimizing Player
         else {
             for (Node n:children) {
+                //if(timeExceeded(depth)) break;
+
                 n.setPoints(node.getMaximizePlayerScore(), node.getMinimisePlayerScore()+ n.getEarnedPoints());
                 beta = Math.min(beta,alphaBeta(n,depth-1, alpha, beta, true));
                 node.value = beta;

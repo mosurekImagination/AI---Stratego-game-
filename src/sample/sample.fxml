@@ -154,6 +154,12 @@
                   <Font size="16.0" />
                </font>
             </Text>
+            <Text fill="#5503cf" layoutX="38.0" layoutY="466.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MAX MOVE TIME:" textAlignment="CENTER" wrappingWidth="134.00001525878906">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <TextField fx:id="tfMaxTime" alignment="CENTER" layoutX="218.0" layoutY="447.0" prefHeight="26.0" prefWidth="55.0" text="0.5" />
             </children>
         </Pane>
     </children>

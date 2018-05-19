@@ -40,6 +40,8 @@ public class Controller {
 
     //Game settings inputs
     @FXML
+    TextField tfMaxTime;
+    @FXML
     CheckBox chbxAIP1;
     @FXML
     CheckBox chbxAIP2;
@@ -241,7 +243,7 @@ public class Controller {
         gp.getRowConstraints().clear();
         updateStats();
         initialiseBoard();
-
+        game.setMaxTime(Double.valueOf(tfMaxTime.getText()));
         //TWO AI PLAYERS -> TWO SETS
         if( chbxAIP1.isSelected() && chbxAIP2.isSelected()){
             game.setAiHeurestic(
