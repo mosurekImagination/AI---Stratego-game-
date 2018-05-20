@@ -3,6 +3,7 @@ package sample;
 import jdk.jshell.spi.ExecutionControl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -123,6 +124,20 @@ public class Node {
         minimisePlayerScore = minP;
     }
 
+//    public Node getChild(int[][] board){
+//        //for every child
+//        List<Node> children = getChilds();
+//        for(int i=0; i<children.size(); i++){
+//
+//            //for every possible acc game node
+//            List<Node> childChilds =  children.get(i).childs;
+//            for(int j=0; j<childChilds.size(); j++){
+//                if(Arrays.deepEquals(childChilds.get(j).board, board)) return childChilds.get(j);
+//            }
+//
+//        }
+//        return this;
+//    }
     public int getX() {
         return x;
     }

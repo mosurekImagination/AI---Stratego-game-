@@ -220,7 +220,7 @@ public class Stratego {
         return connected ? 1:0;
     }
     private void takeField(int x, int y){
-        board[x][y] = player;
+        board[x][y] = 1; //player;
     }
 
     public void printBoard(){
@@ -276,10 +276,10 @@ public class Stratego {
         ai.setAlgorithm_type(algorithm);
     }
     public double getFirstPlayerTime(){
-        return FirstPlayerTime/1000;
+        return FirstPlayerTime;
     }
     public double getSecondPlayerTime(){
-        return SecondPlayerTime/1000;
+        return SecondPlayerTime;
     }
     public void setOrderType(int orderType){
         ai.setOrderType(orderType);

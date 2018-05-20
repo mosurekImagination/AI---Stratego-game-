@@ -20,6 +20,8 @@ import java.util.ArrayList;
 public class Controller {
 
     @FXML
+    Text O_PointsDiff;
+    @FXML
     GridPane gp;
     @FXML
     Text tThinking; // not working TO DO
@@ -216,8 +218,9 @@ public class Controller {
         X_Points.setText(String.valueOf(results[0]));
         O_Points.setText(String.valueOf(results[1]));
         if(game.getWinner()!=0){
-            tfFirstPlayerTime.setText(String.valueOf(game.getFirstPlayerTime()) + " s");
-            tfSecondPlayerTime.setText(String.valueOf(game.getSecondPlayerTime() + " s"));
+            tfFirstPlayerTime.setText(String.valueOf(game.getFirstPlayerTime()) + " ms");
+            tfSecondPlayerTime.setText(String.valueOf(game.getSecondPlayerTime() + " ms"));
+            O_PointsDiff.setText(String.valueOf(results[0]-results[1]));
         }
         if(game.getWinner() > 0){
             String winner = "Winner: "+(game.getWinner()==1?"X": "O");

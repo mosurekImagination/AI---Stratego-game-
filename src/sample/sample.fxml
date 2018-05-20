@@ -160,6 +160,11 @@
                </font>
             </Text>
             <TextField fx:id="tfMaxTime" alignment="CENTER" layoutX="218.0" layoutY="447.0" prefHeight="26.0" prefWidth="55.0" text="0.5" />
+            <Text fx:id="O_PointsDiff" layoutX="414.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+               <font>
+                  <Font name="BN Machine" size="28.0" />
+               </font>
+            </Text>
             </children>
         </Pane>
     </children>

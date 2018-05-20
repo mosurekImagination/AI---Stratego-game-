@@ -32,8 +32,14 @@ public class StrategoAI {
     }
 
     public Touple getNextMove(int[][] board){
-        root = new Node(board);
-        root.setPoints(0,0);
+//        if(root == null){
+            root = new Node(board);
+            root.setPoints(0,0);
+//        }
+//        else{
+//            root = root.getChild(board);
+//        }
+
         startMoveTime();
         if(algorithm_type == TYPE_MIN_MAX_ALFABETA) {
             alphaBeta(root, DEPTH, Integer.MIN_VALUE, Integer.MAX_VALUE, true);
@@ -94,13 +100,11 @@ public class StrategoAI {
 
 
     public int alphaBeta(Node node, int depth, int alpha, int beta, boolean maximizingPlayer){
-
+        List<Node> children = getChildrenHeuristic(node);
         //base case
         if(depth==0 || node.isTerminal() || timeExceeded(depth)){
             return getHeuresticValue(node);
         }
-
-        List<Node> children = getChildrenHeuristic(node);
         //Maximizing Player
         if(maximizingPlayer){
             for (Node n:children) {
