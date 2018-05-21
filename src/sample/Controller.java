@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -118,9 +119,21 @@ public class Controller {
     private void makeAImove() {
         if(game.isAITurn() && !game.isEnd()){
             //lockThinkingStatus(true); //TO-DO NOT WORKING
-            Touple move = game.getAImove();
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    Touple move = game.getAImove();
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            onClick(move.x, move.y);
+                        }
+                    });
+                }
+            }).start();
+
             //lockThinkingStatus(false);
-            onClick(move.x, move.y);
+
         }
     }
 

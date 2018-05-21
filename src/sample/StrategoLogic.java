@@ -95,10 +95,7 @@ public class StrategoLogic {
     }
 
     public int[][] fillBoardField(int[][] board, int x, int y){
-        int[][] newBoard = new int[board.length][board.length];
-        for(int i=0; i<board.length; i++){
-            newBoard[i]= Arrays.copyOf(board[i],board.length);
-        }
+        int[][] newBoard = Node.copyArray(board);
         newBoard[x][y]=1;
         return newBoard;
     }

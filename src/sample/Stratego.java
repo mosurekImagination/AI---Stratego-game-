@@ -86,7 +86,7 @@ public class Stratego {
                 move = player == FIRST_PLAYER ? ai.getNextMove(board): secondAi.getNextMove(board);
             }
         }
-        if(isAIControlled(player)){
+        else if(isAIControlled(player)){
             move = ai.getNextMove(board);
         }
         return move;

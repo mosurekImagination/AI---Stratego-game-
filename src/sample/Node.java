@@ -2,12 +2,9 @@ package sample;
 
 import jdk.jshell.spi.ExecutionControl;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
-public class Node {
+public class Node{
 
     int[][] board;
 
@@ -24,6 +21,7 @@ public class Node {
     StrategoLogic logic;
 
     public Node(int [][]board){
+        //this.board = copyArray(board);
         this.board = board;
         childs= new LinkedList<>();
         logic = new StrategoLogic(board);
@@ -99,6 +97,14 @@ public class Node {
         return childs.get(index);
     }
 
+    public static int[][] copyArray(int[][]board){
+        int[][] newBoard = new int[board.length][board.length];
+        for(int i=0; i<board.length; i++){
+            newBoard[i]= Arrays.copyOf(board[i],board.length);
+        }
+        return newBoard;
+    }
+
     private void printChildBoards(){
         System.out.println("Board:");
         logic.printBoard();
@@ -132,7 +138,9 @@ public class Node {
 //            //for every possible acc game node
 //            List<Node> childChilds =  children.get(i).childs;
 //            for(int j=0; j<childChilds.size(); j++){
-//                if(Arrays.deepEquals(childChilds.get(j).board, board)) return childChilds.get(j);
+//                if(Arrays.deepEquals(childChilds.get(j).board, board)) {
+//                    return childChilds.get(j);
+//                }
 //            }
 //
 //        }

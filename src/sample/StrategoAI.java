@@ -48,7 +48,42 @@ public class StrategoAI {
             minMax(root, DEPTH, true);
         }
         Node bestNode = root.getBestChild();
-        return new Touple(bestNode.getX(), bestNode.getY());
+                return new Touple(bestNode.getX(), bestNode.getY());
+    }
+
+    public int alphaBeta(Node node, int depth, int alpha, int beta, boolean maximizingPlayer){
+        //base case
+        if(depth==0 || node.isTerminal() || timeExceeded(depth)){
+            return getHeuresticValue(node);
+        }
+        List<Node> children = getChildrenHeuristic(node);
+        //Maximizing Player
+        if(maximizingPlayer){
+            for (Node n:children) {
+                //if(timeExceeded(depth)) break;
+
+                n.setPoints(node.getMaximizePlayerScore() + n.getEarnedPoints(),node.getMinimisePlayerScore());
+                alpha = Math.max(alpha,alphaBeta(n,depth-1, alpha, beta, false));
+                if(alpha >= beta)
+                    break;
+            }
+            node.value = alpha;
+            return alpha;
+        }
+
+        //Minimizing Player
+        else {
+            for (Node n:children) {
+                //if(timeExceeded(depth)) break;
+
+                n.setPoints(node.getMaximizePlayerScore(), node.getMinimisePlayerScore()+ n.getEarnedPoints());
+                beta = Math.min(beta,alphaBeta(n,depth-1, alpha, beta, true));
+                node.value = beta;
+                if(alpha >= beta)
+                    break;
+            }
+            return beta;
+        }
     }
 
     private void startMoveTime() {
@@ -98,41 +133,6 @@ public class StrategoAI {
         return false;
     }
 
-
-    public int alphaBeta(Node node, int depth, int alpha, int beta, boolean maximizingPlayer){
-        List<Node> children = getChildrenHeuristic(node);
-        //base case
-        if(depth==0 || node.isTerminal() || timeExceeded(depth)){
-            return getHeuresticValue(node);
-        }
-        //Maximizing Player
-        if(maximizingPlayer){
-            for (Node n:children) {
-                //if(timeExceeded(depth)) break;
-
-                n.setPoints(node.getMaximizePlayerScore() + n.getEarnedPoints(),node.getMinimisePlayerScore());
-                alpha = Math.max(alpha,alphaBeta(n,depth-1, alpha, beta, false));
-                if(alpha >= beta)
-                    break;
-            }
-            node.value = alpha;
-            return alpha;
-        }
-
-        //Minimizing Player
-        else {
-            for (Node n:children) {
-                //if(timeExceeded(depth)) break;
-
-                n.setPoints(node.getMaximizePlayerScore(), node.getMinimisePlayerScore()+ n.getEarnedPoints());
-                beta = Math.min(beta,alphaBeta(n,depth-1, alpha, beta, true));
-                node.value = beta;
-                if(alpha >= beta)
-                    break;
-            }
-            return beta;
-        }
-    }
 
     private List<Node> getChildrenHeuristic(Node node) {
         List<Node> childs = node.getChilds();
